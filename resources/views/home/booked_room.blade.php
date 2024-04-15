@@ -57,17 +57,18 @@
               <h2 style="margin-bottom: 250px">You haven't booked a room yet.</h2>
             </div>
             @else
+          <div class="container ">
                 <table class="table_deg">
                     <tr>
                         <th class="th_deg">Customer Name</th>
                         <th class="th_deg">Room Name</th>
-                        <th class="th_deg">Room Type</th>
+                        {{-- <th class="th_deg">Room Type</th> --}}
                         <th class="th_deg">Check In</th>
                         <th class="th_deg">Check Out</th>
-                        <th>Guest</th>
-                        <th>Services</th>
-                        {{-- <th class="th_deg">Price (Room)</th>
-                        <th class="th_deg">Price (Services)</th> --}}
+                        {{-- <th class="th_deg">Guest</th>
+                        <th class="th_deg">Services</th> --}}
+                    
+                        <th class="th_deg">Price (Services)</th> 
                         <th class="th_deg">Total Price</th>
                         <th class="th_deg">Status</th>
                         {{-- <th class="th_deg">Image</th> --}}
@@ -76,10 +77,11 @@
                       <tr>
                           <td>{{ $rooms->name }}</td>
                           <td>{{ $rooms->room->room_title }}</td>
-                          <td>{{ $rooms->room->room_type }}</td>
+                          {{-- <td>{{ $rooms->room->room_type }}</td> --}}
                           <td>{{ $rooms->start_date }}</td>
                           <td>{{ $rooms->end_date }}</td>
-                          @if( $rooms->adult_per_room == 1)
+
+                          {{-- @if( $rooms->adult_per_room == 1)
                             <td>{{ $rooms->adult_per_room }} Adult
                           @else 
                             <td>{{ $rooms->adult_per_room }} Adults
@@ -90,7 +92,7 @@
                             </td>
                           @else 
                             {{ $rooms->child_per_room }} Children</td>
-                          @endif
+                          @endif --}}
 
                           @if(empty($rooms->service_id))
                             <td>None</td>
