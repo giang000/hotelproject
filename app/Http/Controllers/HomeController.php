@@ -100,7 +100,7 @@ class HomeController extends Controller
     
     public function contact(Request $request){
         $request->validate([
-            'phone' => ['required', 'regex:/^(09|08)\d{8}$/'],
+            'phone' => ['required', 'regex:/^(0)\d{9}$/'],
         ], [
             'phone.regex' => 'The phone number must start with 09 or 08 and have 10 characters.'
         ]);

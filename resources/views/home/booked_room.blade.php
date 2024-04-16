@@ -57,85 +57,139 @@
               <h2 style="margin-bottom: 250px">You haven't booked a room yet.</h2>
             </div>
             @else
-          <div class="container ">
-                <table class="table_deg">
+              <table class="table_deg">
+                  <tr>
+                      <th class="th_deg">Customer Name</th>
+                      <th class="th_deg">Room Name</th>
+                      {{-- <th class="th_deg">Room Type</th> --}}
+                      <th class="th_deg">Check In</th>
+                      <th class="th_deg">Check Out</th>
+                      {{-- <th class="th_deg">Guest</th>
+                      <th class="th_deg">Services</th> --}}
+                  
+          
+                      <th class="th_deg">Total Price</th>
+                      <th class="th_deg">Status</th>
+                      {{-- <th class="th_deg">Image</th> --}}
+                  </tr>
+                  @foreach ($data as $rooms)
                     <tr>
-                        <th class="th_deg">Customer Name</th>
-                        <th class="th_deg">Room Name</th>
-                        {{-- <th class="th_deg">Room Type</th> --}}
-                        <th class="th_deg">Check In</th>
-                        <th class="th_deg">Check Out</th>
-                        {{-- <th class="th_deg">Guest</th>
-                        <th class="th_deg">Services</th> --}}
-                    
-                        <th class="th_deg">Price (Services)</th> 
-                        <th class="th_deg">Total Price</th>
-                        <th class="th_deg">Status</th>
-                        {{-- <th class="th_deg">Image</th> --}}
-                    </tr>
-                    @foreach ($data as $rooms)
-                      <tr>
-                          <td>{{ $rooms->name }}</td>
-                          <td>{{ $rooms->room->room_title }}</td>
-                          {{-- <td>{{ $rooms->room->room_type }}</td> --}}
-                          <td>{{ $rooms->start_date }}</td>
-                          <td>{{ $rooms->end_date }}</td>
+                        <td>{{ $rooms->name }}</td>
+                        <td>{{ $rooms->room->room_title }}</td>
+                        {{-- <td>{{ $rooms->room->room_type }}</td> --}}
+                        <td>{{ $rooms->start_date }}</td>
+                        <td>{{ $rooms->end_date }}</td>
 
-                          {{-- @if( $rooms->adult_per_room == 1)
-                            <td>{{ $rooms->adult_per_room }} Adult
-                          @else 
-                            <td>{{ $rooms->adult_per_room }} Adults
-                          @endif
-                          @if( $rooms->child_per_room == 1)
-                            {{ $rooms->child_per_room }} Child</td>
-                          @elseif($rooms->child_per_room ==0)
-                            </td>
-                          @else 
-                            {{ $rooms->child_per_room }} Children</td>
-                          @endif --}}
-
-                          @if(empty($rooms->service_id))
-                            <td>None</td>
-                          @else
-                          <td>
-                            @foreach (explode(',', $rooms->service_id) as $serviceId)
-                                {{ \App\Models\Service::find($serviceId)->name }}
-                                @if (!$loop->last)
-                                    <br> <!-- Add comma if it's not the last service -->
-                                @endif
-                            @endforeach
+                        {{-- @if( $rooms->adult_per_room == 1)
+                          <td>{{ $rooms->adult_per_room }} Adult
+                        @else 
+                          <td>{{ $rooms->adult_per_room }} Adults
+                        @endif
+                        @if( $rooms->child_per_room == 1)
+                          {{ $rooms->child_per_room }} Child</td>
+                        @elseif($rooms->child_per_room ==0)
                           </td>
-                          @endif
+                        @else 
+                          {{ $rooms->child_per_room }} Children</td>
+                        @endif --}}
 
-                          {{-- <td>{{ $rooms->room->price }}$</td> --}}
-
-                          <td>{{ $rooms->price }}$</td>
-                          <td>{{ $rooms->status }} </td>
-                          {{-- <td><img src="/room/{{ $rooms->room->image }}" alt=""></td> --}}
-                          <td>
-                            <form action="{{ route('checkout', ['id' => $rooms->id]) }}" method="POST">
-                              @csrf
-                              @if($rooms->status == 'approve')
-                              <button class="btn btn-primary" disabled>Checkout</button>
-                              @else
-                                <button class="btn btn-primary">Checkout</button>
+                        {{-- @if(empty($rooms->service_id))
+                          <td>None</td>
+                        @else
+                        <td>
+                          @foreach (explode(',', $rooms->service_id) as $serviceId)
+                              {{ \App\Models\Service::find($serviceId)->name }}
+                              @if (!$loop->last)
+                                  <br> <!-- Add comma if it's not the last service -->
                               @endif
-                            </form>
-                          </td>
-                          <td>
-                            <a href="{{url('cancel_booking' , $rooms->id)}}" class="btn btn-danger" onclick="return confirm ('Are you sure to cancel this room');">Cancel</a></td>
-                            
-                          </td>   
+                          @endforeach
+                        </td>
+                        @endif --}}
+
+                      
+
+                        <td>{{ $rooms->price }}$</td>
+                        <td>{{ $rooms->status }} </td>
+                 
+                        <td>
+                          <form action="{{ route('checkout', ['id' => $rooms->id]) }}" method="POST">
+                            @csrf
+                            @if($rooms->status == 'approve')
+                            <button class="btn btn-primary" disabled>Checkout</button>
+                            @else
+                              <button class="btn btn-primary">Checkout</button>
+                            @endif
+                          </form>
+                        </td>
+                        <td>
+                          <form action="{{ url('cancel_booking', $rooms->id) }}" method="GET">
+                            @csrf
+                            @if($rooms->status == 'approve')
+                            <button class="btn btn-danger" disabled onclick="return confirm('Are you sure to cancel this room?');">Cancel</button>
+                            @else
+                            <button class="btn btn-danger" onclick="return confirm('Are you sure to cancel this room?');">Cancel</button>
+                            @endif
+                        </form>
                         
-                      </tr>
-                    @endforeach
-                </table>
-            @endif
+                        </td>   
+                      
+                    </tr>
+                  @endforeach
+              </table>
+                @endif
           </div>
         </div>
       </div>
       
+      <div>
+        <div class="card w-75">
+          <div class="card-body">
+              <h5 class="card-title">Booking Information</h5>
+              <div class="table-responsive">
+                  <table class="table table_deg">
+                      <tr>
+                          <th class="th_deg">Customer Name</th>
+                          <th class="th_deg">Room Name</th>
+                          <th class="th_deg">Check In</th>
+                          <th class="th_deg">Check Out</th>
+                          <th class="th_deg">Total Price</th>
+                          <th class="th_deg">Status</th>
+                          <th class="th_deg">Actions</th>
+                      </tr>
+                      @foreach ($data as $rooms)
+                      <tr>
+                          <td>{{ $rooms->name }}</td>
+                          <td>{{ $rooms->room->room_title }}</td>
+                          <td>{{ $rooms->start_date }}</td>
+                          <td>{{ $rooms->end_date }}</td>
+                          <td>{{ $rooms->price }}$</td>
+                          <td>{{ $rooms->status }}</td>
+                          <td>
+                              <form action="{{ route('checkout', ['id' => $rooms->id]) }}" method="POST">
+                                  @csrf
+                                  @if($rooms->status == 'approve')
+                                  <button class="btn btn-primary" disabled>Checkout</button>
+                                  @else
+                                  <button class="btn btn-primary">Checkout</button>
+                                  @endif
+                              </form>
+                              <form action="{{ url('cancel_booking', $rooms->id) }}" method="GET">
+                                  @csrf
+                                  @if($rooms->status == 'approve')
+                                  <button class="btn btn-danger" disabled onclick="return confirm('Are you sure to cancel this room?');">Cancel</button>
+                                  @else
+                                  <button class="btn btn-danger" onclick="return confirm('Are you sure to cancel this room?');">Cancel</button>
+                                  @endif
+                              </form>
+                          </td>
+                      </tr>
+                      @endforeach
+                  </table>
+              </div>
+          </div>
+      </div>
       
+      </div>
       <!-- end contact -->
 
       <!--  footer -->
