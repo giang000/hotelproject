@@ -2,18 +2,9 @@
 <html>
   <head> 
   <base href="/public">
- @include ('admin.css')
+    @include ('admin.css')
 
-  <style>
-    label {
-      display: inline-block;
-      width: 200px;
-    }
-    .div_deg{
-      padding-top: 30px;
-      text-align: center;
-    }
-  </style>
+
    </head>
   <body>
   @include ('admin.header')
@@ -28,9 +19,9 @@
 
           @csrf
 
-          <div  class="div_deg">
+          <div class="div_deg">
             <label>Room Title</label>
-            <select name="title">
+            <select class="form-select" name="title">
               <option selected value="{{$data->room_title}}">{{$data->room_title}}</option>
               <option value="Single Room">Single Room</option>
               <option value="Standard Room">Standard Room</option>
@@ -40,20 +31,20 @@
             </select>
           </div>
          
-            <div  class="div_deg">
+            <div class="div_deg">
               <label>Description</label>
 
-              <textarea name="description">{{$data->description}}</textarea>
+              <textarea class="form-control" rows="5" name="description">{{$data->description}}</textarea>
             </div>
             
-            <div  class="div_deg">
+            <div class="div_deg">
               <label>Price($)</label>
-              <input type="number" name = "price" value="{{$data->price}}">
+              <input class="form-control" type="number" name = "price" value="{{$data->price}}">
             </div>
 
-            <div  class="div_deg">
+            <div class="div_deg">
               <label>Room type</label>
-              <select name="type">
+              <select class="form-select" name="type">
                 <option selected value="{{$data->room_type}}">{{$data->room_type}}</option>
                 <option value="Regular Room">Regular Room</option>
                 <option value="Premium Room">Premium Room</option>
@@ -61,40 +52,40 @@
               </select>
             </div>
 
-            <div  class="div_deg">
+            <div class="div_deg">
               <label>Internet</label>
-              <select name="wifi">
+              <select class="form-select" name="wifi">
                 <option selected value="{{$data->wifi}}">{{$data->wifi}}</option>
                 <option value="Wireless Wi-Fi">Wireless Wi-Fi</option>
                 <option value="no">No</option>
               </select>
             </div>
 
-            <div  class="div_deg">
+            <div class="div_deg">
               <label>Area(sqm)</label>
-              <input type="number" name="area" value="{{$data->area}}"></input>
+              <input class="form-control" type="number" name="area" value="{{$data->area}}"></input>
             </div>
 
-            <div  class="div_deg">
+            <div class="div_deg">
               <label>Facilities</label>
-              <textarea name="facilities" >{{$data->facilities}}</textarea>
+              <textarea class="form-control" rows="5" name="facilities" >{{$data->facilities}}</textarea>
             </div>
 
-            <div  class="div_deg">
+            <div class="div_deg">
               <label>Bed and Bath</label>
-              <textarea name="bed_bath">{{$data->bed_bath}}</textarea>
+              <textarea class="form-control" rows="5" name="bed_bath">{{$data->bed_bath}}</textarea>
             </div>
 
-            <div  class="div_deg">
+            <div class="div_deg">
               <label>Current Image</label>
               <img src="/room/{{$data->image}}" alt="" width="300" >
             </div>
-            <div  class="div_deg">
+            <div class="div_deg">
               <label>Upload Image</label>
-              <input type="file" name="image">
+              <input class="form-control" type="file" name="image">
             </div>
 
-            <div  class="div_deg">
+            <div class="div_deg">
               <input class="btn btn-primary" type="submit" value="Update Room">
             </div>          
           </form>

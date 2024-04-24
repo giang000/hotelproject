@@ -1,4 +1,4 @@
-<div  class="gallery">
+<div class="gallery">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
@@ -8,10 +8,10 @@
                </div>
             </div>
             <div class="row">
-               @foreach ($gallary as $gallary)
+               @foreach ($gallery as $gallery)
                <div class="col-md-3 col-sm-6">
                   <div class="gallery_img">
-                     <figure><img src="/gallary/{{$gallary->image}}" alt="#"/></figure>
+                     <figure><img src="/gallery/{{$gallery->image}}" alt="#" class="img-fluid"/></figure>
                   </div>
                </div> 
                @endforeach

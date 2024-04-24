@@ -36,7 +36,7 @@
         <div class="container-fluid"> 
           <table class="table_deg">
             <tr>
-              <th class="th_deg">Room_id</th>
+              <th class="th_deg">Room ID</th>
               <th class="th_deg">Room Title</th>
               <th class="th_deg">Name</th>
               <th class="th_deg">Email</th>

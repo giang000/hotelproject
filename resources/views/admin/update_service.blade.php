@@ -27,22 +27,22 @@
 
           @csrf
 
-          <div  class="div_deg">
+          <div class="div_deg">
             <label>Service's name</label>
-            <input type="text" name="name" value="{{$data->name}}">
+            <input class="form-control" type="text" name="name" value="{{$data->name}}">
           </div>
          
-            <div  class="div_deg">
+            <div class="div_deg">
               <label>Description</label>
-              <textarea name="description">{{$data->description}}</textarea>
+              <textarea class="form-control" row="5" name="description">{{$data->description}}</textarea>
             </div>
             
-            <div  class="div_deg">
+            <div class="div_deg">
               <label>Price($)</label>
-              <input type="float" name = "price" value="{{$data->price}}">
+              <input class="form-control" type="float" name="price" value="{{$data->price}}">
             </div>
 
-            <div  class="div_deg">
+            <div class="div_deg">
               <input class="btn btn-primary" type="submit" value="Update Service">
             </div>          
           </form>

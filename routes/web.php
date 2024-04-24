@@ -73,13 +73,14 @@ Route::post('/add_booking/{id}' , [HomeController::class , 'add_booking']);
 
 Route::get('/our_rooms' , [HomeController::class , 'our_rooms']);
 
-Route::get('/hotel_gallary' , [HomeController::class , 'hotel_gallary']);
+Route::get('/hotel_gallery' , [HomeController::class , 'hotel_gallery']);
 
 Route::get('/about_us' , [HomeController::class , 'about_us']);
 
 Route::get('/contact_us' , [HomeController::class , 'contact_us']);
 
 Route::get('/booked_room' , [HomeController::class , 'booked_room'])->name('booked_room');;
+
 
 Route::get('/cancel_booking/{id}' , [HomeController::class , 'cancel_booking']);
 

@@ -5,7 +5,9 @@
          <div class="col-md-5">
             <div class="titlepage">
                <h2>About Us</h2>
-               <p>The passage experienced a surge in popularity during the 1960s when Letraset used it on their dry-transfer sheets, and again during the 90s as desktop publishers bundled the text with their software. Today it's seen all around the web; on templates, websites, and stock designs. Use our generator to get your own, or read on for the authoritative history of lorem ipsum. </p>
+               <p>             
+                  Nestled in the bustling heart of downtown, our hotel offers a tranquil haven amidst the city's vibrant energy. With contemporary elegance and attentive service, we provide guests with a perfect urban retreat. Our thoughtfully designed accommodations offer comfort and style, while our onsite restaurant serves up culinary delights inspired by global flavors. After a day of exploring the city's attractions, guests can unwind in our wellness facilities, including a fitness center, spa, and rooftop pool with stunning skyline views. Whether you're here for business or leisure, our hotel provides the ideal blend of convenience and relaxation, ensuring a memorable stay in the heart of the city.
+               </p>
             </div>
          </div>
          <div class="col-md-7">

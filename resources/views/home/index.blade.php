@@ -21,10 +21,10 @@
          margin: 0px 0px 15px!important;
       }
       .our_room{
-         background: url(../images/blog_bg.jpg);
-         background-repeat: no-repeat;
-         background-size: 100% 100%;
-         padding: 30px 60px 30px 60px;
+        background-color: #0f1521;  
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        padding: 30px 60px 30px 60px;
       }
    </style>
 
@@ -52,7 +52,7 @@
       <!-- end about -->
 
       <!-- gallery -->
-      {{-- @include ('home.gallary'); --}}
+      {{-- @include ('home.gallery'); --}}
       <!-- end gallery -->
 
       <!-- blog -->
@@ -74,17 +74,20 @@
       <!--  footer -->
       @include ('home.footer')
       <!-- end footer -->
-
+      
       <!-- Javascript files-->
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/jquery-3.0.0.min.js"></script>
+        
         <script src="https://kit.fontawesome.com/a821634e43.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+         <!-- sidebar -->
+        <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="js/custom.js"></script> 
         
         <script>
+       
+
         $(document).ready(function () {
             var itemsMainDiv = '.MultiCarousel';
             var itemsDiv = '.MultiCarousel-inner';
@@ -182,9 +185,7 @@
             }
         });
         </script>>
-      <!-- sidebar -->
-        <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-        <script src="js/custom.js"></script>  
+      
         
    </body>
 </html>

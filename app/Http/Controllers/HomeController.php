@@ -26,6 +26,13 @@ class HomeController extends Controller
             'startDate' => 'required|date',
             'endDate'=>'required|date|after:startDate',
         ]);
+
+        if(auth()->check()) {
+           
+        } else {
+            return redirect()->route('register');
+            
+        }
         $serviceId = Service::findMany($id);
         $data = new Booking;
     
@@ -41,11 +48,12 @@ class HomeController extends Controller
         $end = \Carbon\Carbon::parse($endDate);
 
         // Calculate the number of days between start and end dates
-        $numberOfNights = $start->diffInDays($end)-1;
+        $numberOfNights = $start->diffInDays($end) - 1;
 
         if ($numberOfNights == 0) {
             $numberOfNights = 1;
         }
+    
          // Retrieve and process multiple service IDs
         $serviceIds = $request->input('service_id', []);
 
@@ -55,7 +63,7 @@ class HomeController extends Controller
         $data->adult_per_room = $request->adult_per_room;
         $data->child_per_room = $request->child_per_room;
 
-        $roomPrice = Room::where('id' ,$id)->value('price') * $numberOfNights;
+        $roomPrice = Room::where('id' ,$id)->value('price');
 
         // Retrieve all service prices for the given IDs in a single query
         $servicePrices = Service::whereIn('id', $serviceIds)->pluck('price', 'id');
@@ -71,7 +79,7 @@ class HomeController extends Controller
             }
         }
 
-        $totalPrice = $roomPrice + $serviceTotalPrice * $numberOfNights ;
+        $totalPrice = ($roomPrice + $serviceTotalPrice) * $numberOfNights ;
         $data->price = $totalPrice;
 
         $isBooked = Booking::where('room_id' , $id)
@@ -83,7 +91,7 @@ class HomeController extends Controller
         }else{
             $data->start_date = $request->startDate;
             $data->end_date = $request->endDate;
-    
+        }
         if(auth()->check()) {
             $data->save();
             return redirect()->back()->with('message' , 'Room Booker Successfully');
@@ -95,14 +103,14 @@ class HomeController extends Controller
             
         }
           
-        }
+       
     }
     
     public function contact(Request $request){
         $request->validate([
             'phone' => ['required', 'regex:/^(0)\d{9}$/'],
         ], [
-            'phone.regex' => 'The phone number must start with 09 or 08 and have 10 characters.'
+            'phone.regex' => 'The phone number must start with 0 and have 10 characters.'
         ]);
         $contact = new Contact;
 
@@ -122,9 +130,9 @@ class HomeController extends Controller
         return view('home.our_rooms' , compact('room'));
     }
 
-    public function hotel_gallary(){
-       $gallary = Gallary::all();
-       return view('home.hotel_gallary' , compact('gallary'));
+    public function hotel_gallery(){
+       $gallery = Gallery::all();
+       return view('home.hotel_gallery' , compact('gallery'));
     }
 
     public function about_us(){
@@ -146,6 +154,8 @@ class HomeController extends Controller
             return redirect()->route('login');
         }
     }
+
+
 
     public function cancel_booking($id){
         $rooms = Booking::find($id);

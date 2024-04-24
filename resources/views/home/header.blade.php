@@ -1,5 +1,8 @@
          <!-- header inner -->
          <div class="header">
+            <div class="gtranslate_wrapper"></div>
+            <script>window.gtranslateSettings = {"default_language":"en","languages":["en","vi"],"wrapper_selector":".gtranslate_wrapper"}</script>
+            <script src="https://cdn.gtranslate.net/widgets/latest/flags.js" defer></script>
             <div class="container">
                <div class="row">
                   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
@@ -27,41 +30,38 @@
                               <li class="nav-item">
                                  <a class="nav-link" href="{{url('booked_room')}}">Manage Booking</a>
                               </li>
-                              {{-- <li class="nav-item">
-                                 <a class="nav-link" href="{{url('hotel_gallary')}}">Gallery</a>
-                              </li> --}}
-                              {{-- <li class="nav-item">
-                                 <a class="nav-link" href="{{url('about_us')}}">About Us</a>
-                              </li> --}}
                               <li class="nav-item">
                                  <a class="nav-link" href="{{url('contact_us')}}">Contact Us</a>
                               </li>
 
                               @if (Route::has('login'))
-                                    @auth
-                                    <x-app-layout>
-      
-                                    </x-app-layout>
-      
-                                    @else
-                                       <li class="nav-item">
-                                       <a class="nav-link text-success" href="{{url ('login')}}">Login</a>
-                                       </li>
+                              @auth
+                              <x-app-layout>
 
-                                    @if (Route::has('register'))
-                                       <li class="nav-item">
-                                       <a class="nav-link text-primary" href="{{url ('register')}}">Register</a>
-                                       </li>
-                                    @endif
-                                    @endauth
-                                 
+                              </x-app-layout>
+
+                              @else
+                                 <li class="nav-item">
+                                 <a class="nav-link text-success" href="{{url ('login')}}">Login</a>
+                                 </li>
+
+                              @if (Route::has('register'))
+                                 <li class="nav-item">
+                                 <a class="nav-link text-primary" href="{{url ('register')}}">Register</a>
+                                 </li>
+                              @endif
+                              @endauth
+                              
                               @endif
 
                               
                            </ul>
+
+                         
                         </div>
                      </nav>
                   </div>
+                
                </div>
             </div>
          </div>

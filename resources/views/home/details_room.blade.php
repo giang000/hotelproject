@@ -12,9 +12,7 @@
          width: 200px;
          margin-bottom: 0px!important;
       }
-      input{
-         width: 100%;
-      }
+   
       .informations{
          display: flex;
          padding: 12px;
@@ -49,6 +47,7 @@
          color: #333;
 
          .dropdown-list {
+            
             padding: 12px;
             background: #fff;
             position: absolute;
@@ -64,7 +63,7 @@
          }
   
          .dropdown-option {
-            display: block;
+            display: block
             padding: 8px 12px;
             opacity: 0;
             transition: opacity .15s ease-in-out;
@@ -94,6 +93,7 @@
             .dropdown-option {
             opacity: 1;
             transition-delay: .2s;
+       
             }
          }
     
@@ -101,12 +101,14 @@
                content: '▲';
             }
          }
-  
-         [type="checkbox"] {
-            position: relative;
-            top: -1px;
-            margin-right: 4px;
+         
+         .option-style{
+            display: flex;
+            justify-content: space-between;
          }
+    
+
+  
 }
    </style>
       </head>
@@ -161,7 +163,7 @@
                                  <h4>{{$room->room_type}}</h4>
                                </div>
                                <div style="text-align: center; display: block;">
-                                   <i class="fa fa-wifi fa-4x" aria-hidden="true"></i>
+                                 <i class="fa-solid fa-wifi fa-4x" aria-hidden="true"></i>
                                    <h4>{{$room->wifi}}</h4>
                                </div>
                            </div>
@@ -239,7 +241,7 @@
 
                      <li style="color:red">{{$errors}}</li>
                      @endforeach
-
+                   
                      @endif
                      <h1>{{$room->room_title}}</h1>
                      <h5 style=""><strong>USD{{number_format($room->price, 2)}}</strong><span style="font-size: 14px;">/night</span></h3>
@@ -247,7 +249,7 @@
                         @csrf
                         <div class="form-group">
                            <label>NAME</label>
-                           <input type="text" name="name" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                           <input type="text" name="name" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" required
                            @if(Auth::id())
                            value="{{Auth::user()->name}}"
                            @endif
@@ -255,7 +257,7 @@
                         </div>
                         <div class="form-group">
                            <label>EMAIL</label>
-                           <input type="email" name="email" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                           <input type="email" name="email" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" required
                            @if(Auth::id())
                            value="{{Auth::user()->email}}"
                            @endif
@@ -263,7 +265,7 @@
                         </div>
                         <div class="form-group">
                            <label>PHONE</label>
-                           <input type="number" name="phone" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                           <input type="number" name="phone" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" required
                            @if(Auth::id())
                            value="{{Auth::user()->phone}}"
                            @endif
@@ -272,12 +274,12 @@
                         <div style="display: flex; align-items: center;" class="form-group">
                            <div>
                               <label for="startDate" style="margin-right: 10px;">CHECK IN</label>
-                              <input type="date" name="startDate" id="startDate" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" style="width: 96%;">
+                              <input type="date" name="startDate" id="startDate" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" style="width: 96%;" required>
                            </div>
 
                            <div>
                               <label for="endDate" style="margin-right: 10px;">CHECK OUT</label>
-                              <input type="date" name="endDate" id="endDate" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                              <input type="date" name="endDate" id="endDate" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" required>
                            </div>
                         </div>
                          
@@ -310,32 +312,35 @@
                         <label class="dropdown-label form-control">Select Services</label>
                         <div class="dropdown-list">
                           @foreach($service as $service)
-                            <label class="dropdown-option form-check-label">
-                              <input class="" type="checkbox" name="service_id[]" value="{{ $service->id }}" />
-                              {{ $service->name }} ({{ $service->price }}$)
-                            </label>
+                           <div class="option-style">
+                              <label class="dropdown-option form-check-label">
+                                 <input class="" type="checkbox" name="service_id[]" value="{{ $service->id }}" />
+                                 {{ $service->name }} ({{ $service->price }}$)
+                              </label>
+                              <i class="fa-solid fa-circle-info" data-trigger="focus" tabindex="0" data-toggle="popover" data-placement="top" data-content="{{ $service->description }}"></i>
+                           </div>
                           @endforeach
                         </div>
                       </div>
 
                         <div style="padding-top: 20px;">
-                           <input type="submit" style="background-color: #ff0909; border-style: none;" class="btn btn-primary" value="Book Now">
+                           <input type="submit" style="background-color: #ff0909; border-style: none; width:100%" class="btn btn-primary" value="Book Now">
                         </div>
 
                         
                      </form>
                   </div>
-                  
+                 
                </div>
             </div>
          </div>
-
+       </div>
          <!-- end our_room -->
 
          <!-- gallery -->
          <!-- end gallery -->
          
-        </div>
+       
          <!-- blog -->
          @include ('home.blog')
          <!-- end blog -->
@@ -347,179 +352,186 @@
          <!--  footer -->
          @include ('home.footer')
          <!-- end footer -->
-      <script type="text/javascript">
+      <script>
          $(function(){
-         var dtToday = new Date();
-      
-         var month = dtToday.getMonth() + 1;
+            var dtToday = new Date();
+         
+            var month = dtToday.getMonth() + 1;
 
-         var day = dtToday.getDate();
+            var day = dtToday.getDate();
 
-         var year = dtToday.getFullYear();
+            var year = dtToday.getFullYear();
 
-         if(month < 10)
-            month = '0' + month.toString();
+            if(month < 10)
+               month = '0' + month.toString();
 
-         if(day < 10)
-         day = '0' + day.toString();
+            if(day < 10)
+            day = '0' + day.toString();
 
-         var maxDate = year + '-' + month + '-' + day;
-         $('#startDate').attr('min', maxDate);
-         $('#endDate').attr('min', maxDate);
+            var maxDate = year + '-' + month + '-' + day;
+            $('#startDate').attr('min', maxDate);
+            $('#endDate').attr('min', maxDate);
 
-      });
-
-      $(function() {
-         const plusAdult = document.querySelector(".plus-adult");
-         const minusAdult = document.querySelector(".minus-adult");
-         const numAdult = document.querySelector(".num-adult");
-         const hiddenInputAdult = document.getElementById("adult_per_room");
-         let a = 1;
-
-         plusAdult.addEventListener("click", () => {
-            a++;
-            a = (a <= 4) ? a : 4; // Ensure 'a' doesn't exceed 4
-            numAdult.innerText = a;
-            hiddenInputAdult.value = a; // Update the value of the hidden input field
          });
 
-         minusAdult.addEventListener("click", () => {
-            if (a > 1) {
-                  a--;
-                  numAdult.innerText = a;
-                  hiddenInputAdult.value = a; // Update the value of the hidden input field
-            }
-         });
+         $(function() {
+            const plusAdult = document.querySelector(".plus-adult");
+            const minusAdult = document.querySelector(".minus-adult");
+            const numAdult = document.querySelector(".num-adult");
+            const hiddenInputAdult = document.getElementById("adult_per_room");
+            let a = 1;
 
-         const plusChild = document.querySelector(".plus-child");
-         const minusChild = document.querySelector(".minus-child");
-         const numChild = document.querySelector(".num-child"); // Select the specific element
-         const hiddenInputChild = document.getElementById("child_per_room");
-         let b = 0;
+            plusAdult.addEventListener("click", () => {
+               a++;
+               a = (a <= 4) ? a : 4; // Ensure 'a' doesn't exceed 4
+               numAdult.innerText = a;
+               hiddenInputAdult.value = a; // Update the value of the hidden input field
+            });
 
-         plusChild.addEventListener("click", () => {
-            b++;
-            b = (b <= 4) ? b : 4; // Ensure 'b' doesn't exceed 4
-            numChild.innerText = b;
-            hiddenInputChild.value = b; // Update the value of the hidden input field for children
-         });
+            minusAdult.addEventListener("click", () => {
+               if (a > 1) {
+                     a--;
+                     numAdult.innerText = a;
+                     hiddenInputAdult.value = a; // Update the value of the hidden input field
+               }
+            });
 
-         minusChild.addEventListener("click", () => {
-            if (b > 0) {
-               b--;
+            const plusChild = document.querySelector(".plus-child");
+            const minusChild = document.querySelector(".minus-child");
+            const numChild = document.querySelector(".num-child"); // Select the specific element
+            const hiddenInputChild = document.getElementById("child_per_room");
+            let b = 0;
+
+            plusChild.addEventListener("click", () => {
+               b++;
+               b = (b <= 4) ? b : 4; // Ensure 'b' doesn't exceed 4
                numChild.innerText = b;
                hiddenInputChild.value = b; // Update the value of the hidden input field for children
-            }
-         });
-   
-      
-      });
+            });
 
+            minusChild.addEventListener("click", () => {
+               if (b > 0) {
+                  b--;
+                  numChild.innerText = b;
+                  hiddenInputChild.value = b; // Update the value of the hidden input field for children
+               }
+            });
+      
+         });
         
-      (function($) {
-         var CheckboxDropdown = function(el) {
-            var _this = this;
-            this.isOpen = false;
-            this.areAllChecked = false;
-            this.$el = $(el);
-            this.$label = this.$el.find('.dropdown-label');
-            this.$checkAll = this.$el.find('[data-toggle="check-all"]').first();
-            this.$inputs = this.$el.find('[type="checkbox"]');
+         (function($) {
+            var CheckboxDropdown = function(el) {
+               var _this = this;
+               this.isOpen = false;
+               this.areAllChecked = false;
+               this.$el = $(el);
+               this.$label = this.$el.find('.dropdown-label');
+               this.$checkAll = this.$el.find('[data-toggle="check-all"]').first();
+               this.$inputs = this.$el.find('[type="checkbox"]');
+               
+               this.onCheckBox();
+               
+               this.$label.on('click', function(e) {
+                  e.preventDefault();
+                  _this.toggleOpen();
+               });
+               
+               this.$checkAll.on('click', function(e) {
+                  e.preventDefault();
+                  _this.onCheckAll();
+               });
+               
+               this.$inputs.on('change', function(e) {
+                  _this.onCheckBox();
+               });
+            };
             
-            this.onCheckBox();
+            CheckboxDropdown.prototype.onCheckBox = function() {
+               this.updateStatus();
+            };
             
-            this.$label.on('click', function(e) {
-               e.preventDefault();
-               _this.toggleOpen();
-            });
-            
-            this.$checkAll.on('click', function(e) {
-               e.preventDefault();
-               _this.onCheckAll();
-            });
-            
-            this.$inputs.on('change', function(e) {
-               _this.onCheckBox();
-            });
-         };
-         
-         CheckboxDropdown.prototype.onCheckBox = function() {
-            this.updateStatus();
-         };
-         
-         CheckboxDropdown.prototype.updateStatus = function() {
-            var checked = this.$el.find(':checked');
-            
-            this.areAllChecked = false;
-            this.$checkAll.html('Check All');
-            
-            if(checked.length <= 0) {
-               this.$label.html('Services');
-            }
-            else if(checked.length === 1) {
-               this.$label.html(checked.parent('label').text());
-            }
-            else if(checked.length === this.$inputs.length) {
-               this.$label.html('All Selected');
-               this.areAllChecked = true;
-               this.$checkAll.html('Uncheck All');
-            }
-            else {
-               this.$label.html(checked.length + ' Selected');
-            }
-         };
-         
-         CheckboxDropdown.prototype.onCheckAll = function(checkAll) {
-            if(!this.areAllChecked || checkAll) {
-               this.areAllChecked = true;
-               this.$checkAll.html('Uncheck All');
-               this.$inputs.prop('checked', true);
-            }
-            else {
+            CheckboxDropdown.prototype.updateStatus = function() {
+               var checked = this.$el.find(':checked');
+               
                this.areAllChecked = false;
                this.$checkAll.html('Check All');
-               this.$inputs.prop('checked', false);
-            }
-            
-            this.updateStatus();
-         };
-         
-         CheckboxDropdown.prototype.toggleOpen = function(forceOpen) {
-            var _this = this;
-            
-            if(!this.isOpen || forceOpen) {
-               this.isOpen = true;
-               this.$el.addClass('on');
-               $(document).on('click', function(e) {
-               if(!$(e.target).closest('[data-control]').length) {
-                  _this.toggleOpen();
+               
+               if(checked.length <= 0) {
+                  this.$label.html('Services');
                }
-               });
+               else if(checked.length === 1) {
+                  this.$label.html(checked.parent('label').text());
+               }
+               else if(checked.length === this.$inputs.length) {
+                  this.$label.html('All Selected');
+                  this.areAllChecked = true;
+                  this.$checkAll.html('Uncheck All');
+               }
+               else {
+                  this.$label.html(checked.length + ' Selected');
+               }
+            };
+            
+            CheckboxDropdown.prototype.onCheckAll = function(checkAll) {
+               if(!this.areAllChecked || checkAll) {
+                  this.areAllChecked = true;
+                  this.$checkAll.html('Uncheck All');
+                  this.$inputs.prop('checked', true);
+               }
+               else {
+                  this.areAllChecked = false;
+                  this.$checkAll.html('Check All');
+                  this.$inputs.prop('checked', false);
+               }
+               
+               this.updateStatus();
+            };
+            
+            CheckboxDropdown.prototype.toggleOpen = function(forceOpen) {
+               var _this = this;
+               
+               if(!this.isOpen || forceOpen) {
+                  this.isOpen = true;
+                  this.$el.addClass('on');
+                  
+                  // $(document).on('click', function(e) {
+                  // if(!$(e.target).closest('[data-control]').length) {
+                  //    _this.toggleOpen();
+                  // }
+                  // });
+               }
+               else {
+                  this.isOpen = false;
+                  this.$el.removeClass('on');
+                  // $(document).off('click');
+               }
+            };
+            
+            var checkboxesDropdowns = document.querySelectorAll('[data-control="checkbox-dropdown"]');
+            for(var i = 0, length = checkboxesDropdowns.length; i < length; i++) {
+               new CheckboxDropdown(checkboxesDropdowns[i]);
             }
-            else {
-               this.isOpen = false;
-               this.$el.removeClass('on');
-               $(document).off('click');
-            }
-         };
-         
-         var checkboxesDropdowns = document.querySelectorAll('[data-control="checkbox-dropdown"]');
-         for(var i = 0, length = checkboxesDropdowns.length; i < length; i++) {
-            new CheckboxDropdown(checkboxesDropdowns[i]);
-         }
-         })(jQuery);
+            })(jQuery);
+       
+            $(function () {
+               $('[data-toggle="popover"]').popover({
+                  trigger: 'focus'
+                  });
+            });
          
       </script>
 
+     
 
          <!-- Javascript files-->
-         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-         <script src="js/bootstrap.bundle.min.js"></script>
-         <script src="js/jquery-3.0.0.min.js"></script>      
          <script src="js/jquery.min.js"></script>
+         
+         <script src="js/bootstrap.bundle.min.js"></script>
+        
 
          <script src="https://kit.fontawesome.com/a821634e43.js" crossorigin="anonymous"></script>
          <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        
          <!-- sidebar -->
          <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
          <script src="js/custom.js"></script>
